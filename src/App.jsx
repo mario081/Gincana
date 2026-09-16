@@ -378,21 +378,6 @@ export default function App() {
             <div className="result-text">{lastResult}</div>
           </div>
 
-          <div className="panel-card">
-            <div className="panel-header">Histórico de Giros</div>
-            <div className="history-list">
-              {history.length === 0
-                ? <div className="result-item"><span className="name empty">Nenhum giro ainda</span></div>
-                : history.map((item, i) => (
-                    <div className="result-item" key={i}>
-                      <span className="rank">{i + 1}</span>
-                      <span className="name">{item}</span>
-                    </div>
-                  ))
-              }
-            </div>
-          </div>
-
         </div>
       </div>
     </>
