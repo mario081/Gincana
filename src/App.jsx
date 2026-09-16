@@ -117,9 +117,9 @@ export default function App() {
         ctx.rotate(start + ARC / 2)
         ctx.textAlign   = 'right'
         ctx.fillStyle   = SEG_TEXTS[i % 2]
-        const baseFont  = N > 12 ? 18 : N > 8 ? 22 : 26
+        const baseFont  = N > 12 ? 15 : N > 8 ? 19 : 23
         const labelLen  = segs[i].length
-        const shrink    = labelLen > 24 ? 0.45 : labelLen > 18 ? 0.58 : labelLen > 12 ? 0.73 : labelLen > 8 ? 0.88 : 1
+        const shrink    = labelLen > 24 ? 0.40 : labelLen > 18 ? 0.52 : labelLen > 10 ? 0.68 : labelLen > 7 ? 0.82 : 1
         const fontSize  = Math.max(9, Math.round(baseFont * shrink * scale))
         ctx.font        = `bold ${fontSize}px Segoe UI`
         ctx.shadowColor = '#000'
