@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import './App.css'
 
-const SEG_COLORS = ['#1a0a00', '#c0920a']
-const SEG_TEXTS  = ['#f1c40f', '#fff']
-const DOT_COLORS = ['#f1c40f', '#c0920a']
+const SEG_COLORS = ['#1a0000', '#c0392b']
+const SEG_TEXTS  = ['#fff', '#fff']
+const DOT_COLORS = ['#e74c3c', '#c0392b']
 
 const DEFAULT_SEGMENTS = [
   'ADM',
@@ -88,9 +88,9 @@ export default function App() {
     // anel externo dourado
     ctx.beginPath()
     ctx.arc(cx, cy, rOut + 12, 0, 2 * Math.PI)
-    ctx.fillStyle   = '#8b6914'
+    ctx.fillStyle   = '#7a0000'
     ctx.fill()
-    ctx.strokeStyle = '#f1c40f'
+    ctx.strokeStyle = '#e74c3c'
     ctx.lineWidth   = 3
     ctx.stroke()
 
@@ -115,7 +115,7 @@ export default function App() {
         ctx.closePath()
         ctx.fillStyle   = SEG_COLORS[i % 2]
         ctx.fill()
-        ctx.strokeStyle = '#f1c40f'
+        ctx.strokeStyle = '#e74c3c'
         ctx.lineWidth   = 2
         ctx.stroke()
 
@@ -200,10 +200,10 @@ export default function App() {
       const on = (Math.floor(t * 3 + i) % 2 === 0)
       ctx.beginPath()
       ctx.arc(x, y, Math.round(5.5 * scale), 0, 2 * Math.PI)
-      ctx.fillStyle = on ? '#ffe066' : '#5a4a00'
+      ctx.fillStyle = on ? '#ff4444' : '#4a0000'
       ctx.fill()
       if (on) {
-        ctx.shadowColor = '#ffe066'
+        ctx.shadowColor = '#ff4444'
         ctx.shadowBlur  = 10
         ctx.fill()
         ctx.shadowBlur  = 0
