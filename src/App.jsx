@@ -11,6 +11,12 @@ const DEFAULT_SEGMENTS = [
   'EMPREENDEDORISMO',
   'RH',
   'GESTÃO E FINANÇAS',
+  'ADM',
+  'CONTÁBEIS',
+  'EMPREENDEDORISMO',
+  'RH',
+  'GESTÃO E FINANÇAS',
+  'TENTE OUTRA VEZ',
 ]
 
 const BASE    = 440
