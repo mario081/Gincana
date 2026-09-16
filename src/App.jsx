@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import './App.css'
 
-const SEG_COLORS = ['#1a0000', '#c0392b']
+const SEG_COLORS = ['#1a0000', '#7a1010']
 const SEG_TEXTS  = ['#fff', '#fff']
-const DOT_COLORS = ['#e74c3c', '#c0392b']
+const DOT_COLORS = ['#e74c3c', '#7a1010']
 
 const DEFAULT_SEGMENTS = [
   'ADM',
@@ -185,7 +185,7 @@ export default function App() {
     } else {
       ctx.beginPath()
       ctx.arc(cx, cy, rIn, 0, 2 * Math.PI)
-      ctx.fillStyle = '#c0392b'
+      ctx.fillStyle = '#7a1010'
       ctx.fill()
       ctx.fillStyle = '#fff'
       ctx.font      = `bold ${Math.round(13 * scale)}px Segoe UI`
