@@ -6,16 +6,11 @@ const SEG_TEXTS  = ['#f1c40f', '#fff']
 const DOT_COLORS = ['#f1c40f', '#c0920a']
 
 const DEFAULT_SEGMENTS = [
-  'Girar a Roleta CR',
-  'Bot Question',
-  'Adicionar Nova Questão',
-  'Sua Carta é a...',
-  'A Pessoa Responde...',
-  'Questão da Sorte',
-  'Desafio Relâmpago',
-  'A Raposa Decide!',
-  'Questão Especial',
-  'Sorte Grande',
+  'ADM',
+  'CONTÁBEIS',
+  'EMPREENDEDORISMO',
+  'RH',
+  'GESTÃO E FINANÇAS',
 ]
 
 const BASE    = 440
@@ -98,6 +93,11 @@ export default function App() {
       ctx.textAlign = 'center'
       ctx.fillText('Adicione itens →', cx, cy)
     } else {
+      ctx.save()
+      ctx.beginPath()
+      ctx.arc(cx, cy, rOut, 0, 2 * Math.PI)
+      ctx.clip()
+
       for (let i = 0; i < N; i++) {
         const start = angle + i * ARC
         const end   = start + ARC
@@ -117,15 +117,15 @@ export default function App() {
         ctx.rotate(start + ARC / 2)
         ctx.textAlign   = 'right'
         ctx.fillStyle   = SEG_TEXTS[i % 2]
-        const baseFont  = N > 12 ? 15 : N > 8 ? 19 : 23
+        const baseFont  = N > 12 ? 13 : N > 8 ? 16 : 20
         const labelLen  = segs[i].length
-        const shrink    = labelLen > 24 ? 0.40 : labelLen > 18 ? 0.52 : labelLen > 10 ? 0.68 : labelLen > 7 ? 0.82 : 1
+        const shrink    = labelLen > 24 ? 0.35 : labelLen > 14 ? 0.44 : labelLen > 10 ? 0.58 : labelLen > 7 ? 0.72 : 1
         const fontSize  = Math.max(9, Math.round(baseFont * shrink * scale))
         ctx.font        = `bold ${fontSize}px Segoe UI`
         ctx.shadowColor = '#000'
         ctx.shadowBlur  = 5
 
-        const maxChars = N > 10 ? 12 : 16
+        const maxChars = N > 10 ? 12 : 14
         const words    = segs[i].split(' ')
         let lines = [], cur = ''
         for (const w of words) {
@@ -137,13 +137,15 @@ export default function App() {
         if (lines.length > 3) lines = [lines.slice(0, -1).join(' '), lines[lines.length - 1]]
 
         const lineH = fontSize + 3
-        const tx    = rOut - Math.round(10 * scale)
+        const tx    = rOut - Math.round(14 * scale)
         const ty    = -(lines.length - 1) * lineH / 2
         lines.forEach((line, li) => ctx.fillText(line, tx, ty + li * lineH))
 
         ctx.shadowBlur = 0
         ctx.restore()
       }
+
+      ctx.restore()
     }
 
     // hub central
