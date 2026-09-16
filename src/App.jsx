@@ -368,13 +368,6 @@ export default function App() {
               style={{ cursor: spinning ? 'default' : 'pointer' }}
             />
           </div>
-          <button
-            className="btn-girar"
-            onClick={handleSpin}
-            disabled={spinning || segments.length < 2}
-          >
-            GIRAR
-          </button>
         </div>
 
         {/* Painel lateral */}
