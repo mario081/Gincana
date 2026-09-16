@@ -117,13 +117,11 @@ export default function App() {
         ctx.rotate(start + ARC / 2)
         ctx.textAlign   = 'right'
         ctx.fillStyle   = SEG_TEXTS[i % 2]
-        const baseFont  = N > 12 ? 13 : N > 8 ? 16 : 20
+        const baseFont  = N > 12 ? 14 : N > 8 ? 18 : 26
         const labelLen  = segs[i].length
-        const shrink    = labelLen > 24 ? 0.35 : labelLen > 14 ? 0.44 : labelLen > 10 ? 0.58 : labelLen > 7 ? 0.72 : 1
-        const fontSize  = Math.max(9, Math.round(baseFont * shrink * scale))
+        const shrink    = labelLen > 24 ? 0.42 : labelLen > 14 ? 0.58 : labelLen > 10 ? 0.74 : labelLen > 7 ? 0.88 : 1
+        let fontSize    = Math.max(9, Math.round(baseFont * shrink * scale))
         ctx.font        = `bold ${fontSize}px Segoe UI`
-        ctx.shadowColor = '#000'
-        ctx.shadowBlur  = 5
 
         const maxChars = N > 10 ? 12 : 14
         const words    = segs[i].split(' ')
@@ -136,8 +134,19 @@ export default function App() {
         if (cur) lines.push(cur)
         if (lines.length > 3) lines = [lines.slice(0, -1).join(' '), lines[lines.length - 1]]
 
+        const maxWidth    = rOut - rIn - Math.round(28 * scale)
+        const longestLine = lines.reduce((a, b) => a.length > b.length ? a : b, '')
+        const measured    = ctx.measureText(longestLine).width
+        if (measured > maxWidth) {
+          fontSize = Math.max(9, Math.floor(fontSize * maxWidth / measured))
+          ctx.font = `bold ${fontSize}px Segoe UI`
+        }
+
+        ctx.shadowColor = '#000'
+        ctx.shadowBlur  = 5
+
         const lineH = fontSize + 3
-        const tx    = rOut - Math.round(14 * scale)
+        const tx    = rOut - Math.round(12 * scale)
         const ty    = -(lines.length - 1) * lineH / 2
         lines.forEach((line, li) => ctx.fillText(line, tx, ty + li * lineH))
 
