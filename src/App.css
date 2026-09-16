@@ -255,3 +255,46 @@ canvas { border-radius: 50%; display: block; }
 .btn-ok  { color: #2ecc71; font-size: 16px; font-weight: 700; }
 
 .empty-msg { color: #555; font-size: 13px; text-align: center; padding: 12px 0; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-box {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  width: 360px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #1e1e1e;
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 14px;
+  font-weight: 700;
+  color: #e74c3c;
+}
+
+.modal-box .editor-body {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-box .seg-list {
+  max-height: none;
+}

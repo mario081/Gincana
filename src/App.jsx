@@ -48,6 +48,7 @@ export default function App() {
   const [editIdx, setEditIdx]       = useState(null)
   const [editVal, setEditVal]       = useState('')
   const [spinning, setSpinning]     = useState(false)
+  const [showEditor, setShowEditor] = useState(false)
 
   const canvasRef    = useRef(null)
   const angleRef     = useRef(0)
@@ -295,8 +296,57 @@ export default function App() {
         <img src="/img/logo.jpg" className="nav-logo" alt="Mascote CR" />
         <div className="nav-links">
           <a href="#" className="active">Home</a>
+          <a href="#" onClick={e => { e.preventDefault(); setShowEditor(true) }}>Editar Roleta</a>
         </div>
       </nav>
+
+      {showEditor && (
+        <div className="modal-overlay" onClick={() => setShowEditor(false)}>
+          <div className="modal-box" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <span>✏️ Editar Roleta</span>
+              <button className="btn-icon btn-del" onClick={() => setShowEditor(false)}>✕</button>
+            </div>
+            <div className="editor-body">
+              <div className="add-row">
+                <input
+                  value={newSeg}
+                  onChange={e => setNewSeg(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && addSeg()}
+                  placeholder="Nome ou número do item..."
+                  maxLength={40}
+                />
+                <button className="btn-add" onClick={addSeg}>+</button>
+              </div>
+              <div className="seg-list">
+                {segments.length === 0
+                  ? <div className="empty-msg">Nenhum item. Adicione acima.</div>
+                  : segments.map((seg, i) => (
+                      <div className="seg-item" key={i}>
+                        <span className="seg-dot" style={{ background: DOT_COLORS[i % 2] }} />
+                        {editIdx === i
+                          ? <input
+                              className="seg-edit-input"
+                              value={editVal}
+                              onChange={e => setEditVal(e.target.value)}
+                              onKeyDown={e => e.key === 'Enter' && saveEdit()}
+                              autoFocus
+                            />
+                          : <span className="seg-label">{seg}</span>
+                        }
+                        {editIdx === i
+                          ? <button className="btn-icon btn-ok" onClick={saveEdit}>✓</button>
+                          : <button className="btn-icon btn-ed" onClick={() => startEdit(i)}>✏️</button>
+                        }
+                        <button className="btn-icon btn-del" onClick={() => deleteSeg(i)}>✕</button>
+                      </div>
+                    ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="main">
         {/* Roda */}
@@ -334,47 +384,6 @@ export default function App() {
                     </div>
                   ))
               }
-            </div>
-          </div>
-
-          <div className="panel-card">
-            <div className="panel-header">✏️ Editar Roleta</div>
-            <div className="editor-body">
-              <div className="add-row">
-                <input
-                  value={newSeg}
-                  onChange={e => setNewSeg(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && addSeg()}
-                  placeholder="Nome ou número do item..."
-                  maxLength={40}
-                />
-                <button className="btn-add" onClick={addSeg}>+</button>
-              </div>
-              <div className="seg-list">
-                {segments.length === 0
-                  ? <div className="empty-msg">Nenhum item. Adicione acima.</div>
-                  : segments.map((seg, i) => (
-                      <div className="seg-item" key={i}>
-                        <span className="seg-dot" style={{ background: DOT_COLORS[i % 2] }} />
-                        {editIdx === i
-                          ? <input
-                              className="seg-edit-input"
-                              value={editVal}
-                              onChange={e => setEditVal(e.target.value)}
-                              onKeyDown={e => e.key === 'Enter' && saveEdit()}
-                              autoFocus
-                            />
-                          : <span className="seg-label">{seg}</span>
-                        }
-                        {editIdx === i
-                          ? <button className="btn-icon btn-ok" onClick={saveEdit}>✓</button>
-                          : <button className="btn-icon btn-ed" onClick={() => startEdit(i)}>✏️</button>
-                        }
-                        <button className="btn-icon btn-del" onClick={() => deleteSeg(i)}>✕</button>
-                      </div>
-                    ))
-                }
-              </div>
             </div>
           </div>
 
