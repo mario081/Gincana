@@ -12,6 +12,7 @@ const DEFAULT_SEGMENTS = [
   'RH',
   'GESTÃO E FINANÇAS',
   'ADM',
+  'TENTE OUTRA VEZ',
   'CONTÁBEIS',
   'EMPREENDEDORISMO',
   'RH',
