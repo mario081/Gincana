@@ -354,7 +354,19 @@ export default function App() {
         <div className="wheel-area">
           <div className="wheel-wrapper" style={{ width: wheelSize, height: wheelSize }}>
             <div className="pointer" />
-            <canvas ref={canvasRef} width={wheelSize} height={wheelSize} />
+            <canvas
+              ref={canvasRef}
+              width={wheelSize}
+              height={wheelSize}
+              onClick={e => {
+                const rect = canvasRef.current.getBoundingClientRect()
+                const x = e.clientX - rect.left - wheelSize / 2
+                const y = e.clientY - rect.top  - wheelSize / 2
+                const rIn = Math.round(60 * (wheelSize / BASE))
+                if (Math.sqrt(x * x + y * y) <= rIn) handleSpin()
+              }}
+              style={{ cursor: spinning ? 'default' : 'pointer' }}
+            />
           </div>
           <button
             className="btn-girar"
